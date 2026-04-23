@@ -1,0 +1,68 @@
+## Product Requirements Document (PRD): Project "Legacy Vault"
+
+**Project Lead:** Forrest K. Chang  
+**Target User:** Max (and his ~12 legacy martial arts students)  
+**Status:** Prototype Phase / "Vibe Coding" Strategy
+
+---
+
+### 1. The Big Picture
+The "Legacy Vault" is a zero-maintenance, zero-cost digital archive designed to honor the "buy once, access forever" policy for Max’s original students. 
+
+**The core mission:** Move legacy users off the high-overhead Skool platform into a private, professional-grade video library that costs Max **$0/month** and requires **zero technical maintenance** from him.
+
+#### Key Pillars:
+* **Zero Infrastructure:** No servers, no databases, no monthly subscriptions.
+* **Invisible Security:** Uses "Invisible Link" technology (browser-side decryption) to prevent students from sharing private YouTube URLs.
+* **Static but Personal:** Every student sees only what they paid for, delivered through a high-performance static site (GitHub Pages).
+
+---
+
+### 2. The Prototype: "The Proof of Concept"
+The goal of this prototype is to show Max a working "Locker Room" where he can see his videos but cannot find the links to steal them.
+
+#### A. User Flow
+1.  **Entry:** Max arrives at a clean, branded landing page on GitHub Pages.
+2.  **Authentication:** Max enters a test email (`max@test.com`) and a password.
+3.  **The Vault:** Upon "unlocking," the page dynamically renders two video thumbnails.
+4.  **Playback:** Clicking a thumbnail reveals the video player. The YouTube branding (Title, Logo, Share buttons) is physically masked.
+
+#### B. Functional Requirements
+* **Link Obfuscation:** The YouTube IDs (e.g., `dQw4w9WgXcQ`) must **not** appear in the HTML source code. They will be stored in an encrypted JSON shard.
+* **Client-Side Decryption:** The browser will use the password entered by Max to "unscramble" the links in memory.
+* **UI Masking:** The video container will use CSS "overhangs" to hide the YouTube header and footer.
+* **Interaction Shield:** A transparent overlay will prevent right-clicking on the video to "Copy URL."
+
+---
+
+### 3. Technical Implementation Details (The Prototype)
+
+#### Phase 1: The "Vault Shard" (Admin Side)
+You will run a local Ruby script to generate the encrypted payload for Max.
+* **Input:** `["Video_ID_1", "Video_ID_2"]` + `Password`.
+* **Output:** `max_vault.json` (A file containing a single long string of AES-encrypted gibberish).
+
+#### Phase 2: The Gateway (GitHub Pages)
+A single `index.html` file using **Phlex-style** clean HTML and a small JavaScript "Vibe" script.
+
+| Component | Responsibility |
+| :--- | :--- |
+| **Login Form** | Captures credentials (no backend involved). |
+| **Decryption Script** | Uses the password to turn the `.json` string back into an array of IDs. |
+| **Player Component** | Injects the `<iframe>` only *after* successful decryption. |
+
+---
+
+### 4. Success Metrics for the Prototype
+* **Max's "Inspect" Test:** Max opens Chrome DevTools, searches for "youtube.com," and finds **zero** results until the video is actively playing.
+* **The "Share" Test:** Max tries to click the YouTube logo to open the video in a new tab and finds he cannot.
+* **The Mobile Test:** The layout holds up on a phone, keeping the "masking" intact on smaller screens.
+
+---
+
+### 5. Next Steps for "Vibe Coding"
+1.  **Draft the Ruby Build Script:** Create the local logic to encrypt a few test YouTube IDs.
+2.  **Scaffold the GitHub Page:** Build the "Vault" UI with the CSS Masking container.
+3.  **Bridge the Math:** Write the JS function that decrypts what the Ruby script encrypted.
+
+**Would you like me to generate the Ruby script to create Max's first encrypted "Vault Shard" now?**

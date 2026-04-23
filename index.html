@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legacy Vault Prototype</title>
+    <meta
+      name="description"
+      content="Legacy Vault prototype: a private static video locker with browser-side decryption."
+    />
+    <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero card">
+        <p class="eyebrow">Legacy Vault</p>
+        <h1>Buy once. Access forever.</h1>
+        <p class="lede">
+          A prototype locker room for legacy students. No server. No database. Just a static vault that
+          unlocks in the browser.
+        </p>
+        <ul class="hero-points" aria-label="Prototype highlights">
+          <li>Encrypted video shard</li>
+          <li>Client-side unlock flow</li>
+          <li>Masked playback frame</li>
+        </ul>
+      </header>
+
+      <main class="layout">
+        <section class="card auth-card" aria-labelledby="unlock-heading">
+          <div>
+            <p class="section-label">Step 1</p>
+            <h2 id="unlock-heading">Unlock the vault</h2>
+            <p class="muted">
+              Use the legacy account email and password to decrypt the private video list directly in your browser.
+            </p>
+          </div>
+
+          <form id="login-form" class="auth-form">
+            <label>
+              <span>Email</span>
+              <input id="email" name="email" type="email" placeholder="max@test.com" autocomplete="email" required />
+            </label>
+
+            <label>
+              <span>Password</span>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter vault password"
+                autocomplete="current-password"
+                required
+              />
+            </label>
+
+            <button type="submit">Unlock legacy access</button>
+            <p id="auth-status" class="status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="card vault-card hidden" id="vault-panel" aria-labelledby="vault-heading">
+          <div class="vault-header">
+            <div>
+              <p class="section-label">Step 2</p>
+              <h2 id="vault-heading">Locker room</h2>
+              <p class="muted">Only the decrypted entries for this account render here.</p>
+            </div>
+            <button id="lock-button" class="ghost-button" type="button">Lock vault</button>
+          </div>
+
+          <div id="vault-grid" class="vault-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="card player-card hidden" id="player-panel" aria-labelledby="player-heading">
+          <div class="player-header">
+            <div>
+              <p class="section-label">Step 3</p>
+              <h2 id="player-heading">Masked playback</h2>
+              <p id="player-copy" class="muted">Choose a decrypted lesson to begin playback.</p>
+            </div>
+            <div class="player-actions">
+              <button id="replay-button" class="ghost-button" type="button">Replay</button>
+              <button id="close-player-button" class="ghost-button" type="button">Close</button>
+            </div>
+          </div>
+
+          <div class="player-shell">
+            <div class="player-frame" id="player-frame">
+              <div class="player-placeholder">
+                <p>Select a lesson card to load the private player.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="player-note">
+            <strong>Prototype lock:</strong>
+            a transparent shield blocks direct interaction inside the frame while top and bottom masks hide branded controls.
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="video-card-template">
+      <article class="video-card">
+        <button class="video-thumb" type="button">
+          <span class="video-overlay">
+            <span class="play-pill">Play lesson</span>
+          </span>
+        </button>
+        <div class="video-meta">
+          <h3></h3>
+          <p></p>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
