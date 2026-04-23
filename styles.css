@@ -28,7 +28,8 @@ body {
 }
 
 button,
-input {
+input,
+output {
   font: inherit;
 }
 
@@ -125,18 +126,27 @@ button {
   margin-top: 1.25rem;
 }
 
-.auth-form label {
+.auth-form label,
+.volume-control,
+.seek-control {
   display: grid;
   gap: 0.4rem;
 }
 
-.auth-form span {
+.auth-form span,
+.volume-control span,
+.seek-control span {
   font-size: 0.95rem;
   font-weight: 600;
 }
 
-.auth-form input {
+.auth-form input,
+.volume-control input,
+.seek-control input {
   width: 100%;
+}
+
+.auth-form input {
   padding: 0.95rem 1rem;
   border-radius: 18px;
   border: 1px solid rgba(148, 163, 184, 0.25);
@@ -145,7 +155,8 @@ button {
 }
 
 .auth-form button,
-.ghost-button {
+.ghost-button,
+.control-button {
   padding: 0.95rem 1.2rem;
   transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
 }
@@ -156,7 +167,8 @@ button {
   font-weight: 800;
 }
 
-.ghost-button {
+.ghost-button,
+.control-button {
   color: var(--text);
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(148, 163, 184, 0.2);
@@ -164,8 +176,15 @@ button {
 
 .auth-form button:hover,
 .ghost-button:hover,
+.control-button:hover,
 .video-thumb:hover {
   transform: translateY(-1px);
+}
+
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .status {
@@ -187,7 +206,8 @@ button {
 }
 
 .vault-header,
-.player-header {
+.player-header,
+.control-row {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -243,7 +263,8 @@ button {
   color: var(--muted);
 }
 
-.player-shell {
+.player-shell,
+.player-controls {
   margin-top: 1.25rem;
 }
 
@@ -257,6 +278,7 @@ button {
   background: #020617;
 }
 
+.player-mount,
 .player-frame iframe,
 .player-placeholder,
 .frame-mask,
@@ -278,6 +300,7 @@ button {
 .frame-mask {
   pointer-events: none;
   background: transparent;
+  z-index: 2;
 }
 
 .frame-mask.top {
@@ -295,6 +318,36 @@ button {
 .frame-shield {
   background: transparent;
   z-index: 3;
+}
+
+.player-controls {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.primary-controls {
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+.control-button {
+  min-width: 92px;
+}
+
+.volume-control {
+  min-width: 180px;
+  flex: 1 1 220px;
+}
+
+.seek-control {
+  flex: 1 1 auto;
+}
+
+.time-display {
+  min-width: 110px;
+  align-self: end;
+  color: var(--muted);
+  text-align: right;
 }
 
 .player-note {
@@ -317,7 +370,8 @@ button {
   }
 
   .vault-header,
-  .player-header {
+  .player-header,
+  .control-row {
     flex-direction: column;
   }
 
@@ -326,6 +380,21 @@ button {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
+  }
+
+  .primary-controls {
+    align-items: stretch;
+  }
+
+  .control-button,
+  .volume-control,
+  .seek-control,
+  .time-display {
+    width: 100%;
+  }
+
+  .time-display {
+    text-align: left;
   }
 
   .frame-mask.top {

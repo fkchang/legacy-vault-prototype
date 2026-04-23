@@ -94,9 +94,30 @@
             </div>
           </div>
 
+          <section class="player-controls hidden" id="player-controls" aria-label="External player controls">
+            <div class="control-row primary-controls">
+              <button id="play-pause-button" class="control-button" type="button">Play</button>
+              <button id="back-button" class="control-button" type="button">-10s</button>
+              <button id="forward-button" class="control-button" type="button">+10s</button>
+              <button id="mute-button" class="control-button" type="button">Mute</button>
+              <label class="volume-control">
+                <span>Volume</span>
+                <input id="volume-slider" type="range" min="0" max="100" step="1" value="100" />
+              </label>
+            </div>
+
+            <div class="control-row scrub-row">
+              <label class="seek-control">
+                <span>Progress</span>
+                <input id="seek-slider" type="range" min="0" max="1000" step="1" value="0" />
+              </label>
+              <output id="time-display" class="time-display">0:00 / 0:00</output>
+            </div>
+          </section>
+
           <div class="player-note">
             <strong>Prototype lock:</strong>
-            a transparent shield blocks direct interaction inside the frame while top and bottom masks hide branded controls.
+            the live player stays shielded from direct clicks while the external controls drive playback.
           </div>
         </section>
       </main>
